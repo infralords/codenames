@@ -1,6 +1,7 @@
+import React from "react"
 import Color from "../utils/colors"
 
-export function ComposeUIBoard(props : { board : Color[][]}, boardIndex = 0){
+export function Board(props : { board : Color[][]}, boardIndex = 0){
     return (
         <>
             {
@@ -24,4 +25,45 @@ export function ComposeUIBoard(props : { board : Color[][]}, boardIndex = 0){
         </>
     )
 }
+
+export class CoopGameUI extends React.Component{
+
+    constructor(props: {
+        teamA : Color[][],
+        teamB : Color[][]
+    }){
+        super(props)
+    }
+    render(){
+        return (
+            <div>
+                <HideControls />
+                {/* boards */}
+                <GamesControls/>
+            </div>
+        )
+    }
+}
+
+export function HideControls(){
+    return (
+        <>
+        </>
+    )
+}
+
+
+/**
+ * @function GamesControls 
+ * previous boards, generate new board, next board if it's on a previous board
+ */
+
+export function GamesControls(){
+    return (
+        <>
+        </>
+    )
+}
+
+
 

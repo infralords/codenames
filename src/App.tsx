@@ -1,20 +1,18 @@
-import './App.css'
-import { ComposeUIBoard } from './components/coopBoard'
-import Color from './utils/colors'
+import { Board } from './components/coopBoard'
 
+import { generateCoopBoard,
+         getGenerator,
+         getRandomBoard,
+         getRandomSeed } from './logic/generate'
 
-const veet = [
-  [Color.GRAY,Color.GREEN,Color.GRAY ,Color.GREEN,Color.GRAY],
-  [Color.GRAY,Color.BLACK,Color.GRAY ,Color.GREEN,Color.GRAY],
-  [Color.GREEN,Color.GRAY,Color.BLACK,Color.GRAY ,Color.BLACK],
-  [Color.GREEN,Color.GRAY,Color.GRAY ,Color.GREEN,Color.GREEN],
-  [Color.GRAY,Color.GREEN,Color.GREEN,Color.GRAY ,Color.GRAY]
-]
+import { testBoard } from './components/_testBoard'
+
 
 function  App() {
   return (
     <>
-      <ComposeUIBoard board = { veet } />
+      <Board board = { testBoard } />
+
     </>
   )
 }
