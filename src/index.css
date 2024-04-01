@@ -46,9 +46,15 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+button.gameCard {
+  padding: 2em;
+  margin: 0.5em;
+}
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

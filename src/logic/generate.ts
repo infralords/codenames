@@ -21,7 +21,7 @@ export function generateCoopBoard (seed : string) : [Color[][],Color[][]]{
 export function getRandomBoard(rng : seedrandom.PRNG){
     return _.chunk(
         [
-          ...(Array.from({ length: 13 }).fill(Color.YELLOW) as Color[]),
+          ...(Array.from({ length: 13 }).fill(Color.GRAY) as Color[]),
           ...(Array.from({ length: 9 }).fill(Color.GREEN) as Color[]),
           ...(Array.from({ length: 3 }).fill(Color.BLACK) as Color[]),
         ].sort(() => rng() - 0.5),
