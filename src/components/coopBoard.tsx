@@ -3,7 +3,7 @@ import Color from "../utils/colors"
 import { ElementOptionSwitch } from "./tristateSwitch/ElementOptionSwitch";
 import type { switchTriStates } from "./tristateSwitch/ElementOptionSwitch";
 import { getRandomBoard, getRandomSeed, getGenerator } from "../logic/generate";
-import spyImg from '../assets/spy.ico'
+import spyImg from '../assets/no-eye.svg'
 
 export function Board(props : {
     board: Color[][],
