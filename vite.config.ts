@@ -8,5 +8,6 @@ export default defineConfig({
     watch: {
       usePolling: true
     }
-  }
+  },
+  base: "https://carafelix.github.io/codenames-coop/"
 })
