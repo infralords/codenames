@@ -3,7 +3,7 @@ import Color from "../utils/colors"
 import { ElementOptionSwitch } from "./tristateSwitch/ElementOptionSwitch";
 import type { switchTriStates } from "./tristateSwitch/ElementOptionSwitch";
 import { getRandomBoard, getRandomSeed, getGenerator } from "../logic/generate";
-import spyImg from '../assets/no-eye.svg'
+import noEyeImg from '../assets/no-eye.svg'
 
 export function Board(props : {
     board: Color[][],
@@ -109,7 +109,7 @@ export class CoopGameUI extends React.Component<{},{
                     this.state.teamSwitchButtonState !== 'off'  ? 
                     <Board board = {this.state.board} />        :
                     <div style={{display: 'flex'}}>
-                        <img src={spyImg} 
+                        <img src={noEyeImg} 
                          alt="no view para los papis"
                          className="eye"/> 
                     </div>
