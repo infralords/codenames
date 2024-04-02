@@ -80,11 +80,12 @@ export class CoopGameUI extends React.Component<{},{
     regenerateTeamState = () => {
         this.setState((state)=>{
             const boardA = getRandomBoard(getGenerator(getRandomSeed()))
+            const boardB = getRandomBoard(getGenerator(getRandomSeed()))
             return {
                 teamSwitchButtonState: state.teamSwitchButtonState,
-                board: boardA,
+                board: state.teamSwitchButtonState === 'team-a' ? boardA : boardB,
                 teamA: boardA,
-                teamB: getRandomBoard(getGenerator(getRandomSeed()))
+                teamB: boardB
             }
         })
     }
