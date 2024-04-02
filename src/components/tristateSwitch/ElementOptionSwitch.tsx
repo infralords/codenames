@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import { useReducer } from "react";
 import "./style.css";
+import thumb from './thumb-3.svg'
 
 export const ElementOptionSwitch = ({ stateProp , onSignalChange } : tristateProps ) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -21,7 +22,7 @@ export const ElementOptionSwitch = ({ stateProp , onSignalChange } : tristatePro
           dispatch("click");
         }}
       >
-        <img className="thumb" alt="Thumb" src="src/components/tristateSwitch/thumb-3.svg" />
+        <img className="thumb" alt="Thumb" src={thumb} />
       </div>
   );
 };

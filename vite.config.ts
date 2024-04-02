@@ -9,5 +9,5 @@ export default defineConfig({
       usePolling: true
     }
   },
-  base: "codenames-coop/"
+  base: "/codenames-coop/"
 })
