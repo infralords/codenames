@@ -1,4 +1,4 @@
-import React, { useReducer } from "react"
+import React from "react"
 import Color from "../utils/colors"
 import { ElementOptionSwitch } from "./tristateSwitch/ElementOptionSwitch";
 import type { switchTriStates } from "./tristateSwitch/ElementOptionSwitch";
@@ -68,7 +68,6 @@ export class CoopGameUI extends React.Component<{},{
         super(props)
         const boardA  = getRandomBoard(getGenerator(getRandomSeed()))
         const boardB  = getRandomBoard(getGenerator(getRandomSeed())) 
-
         this.state = {
             teamSwitchButtonState: 'off',
             board: boardA,
@@ -79,7 +78,7 @@ export class CoopGameUI extends React.Component<{},{
 
     regenerateTeamState = () => {
         this.setState((state)=>{
-           const boardA = getRandomBoard(getGenerator(getRandomSeed()))
+            const boardA = getRandomBoard(getGenerator(getRandomSeed()))
             return {
                 teamSwitchButtonState: state.teamSwitchButtonState,
                 board: boardA,
