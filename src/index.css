@@ -61,7 +61,17 @@ button:hover {
 .eye{
   flex: 1;
   filter: invert(100%);
+  width: 410px;
+  height: 410px; 
+  /* do not set it fix size... make a proper grid lazy man */
 }
+
+@-moz-document url-prefix() {
+  .eye {
+    width: 510px;
+    height: 510px; 
+  }
+}  
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -78,3 +88,4 @@ button:hover {
     filter: none;
   }
 }
+
