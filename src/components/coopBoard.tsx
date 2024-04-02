@@ -2,7 +2,7 @@ import React, { useReducer } from "react"
 import Color from "../utils/colors"
 import { ElementOptionSwitch } from "./tristateSwitch/ElementOptionSwitch";
 import type { switchTriStates } from "./tristateSwitch/ElementOptionSwitch";
-// import { getRandomBoard, getRandomSeed, getGenerator } from "../logic/generate";
+import { getRandomBoard, getRandomSeed, getGenerator } from "../logic/generate";
 
 export function Board(props : {
     board: Color[][],
@@ -54,27 +54,46 @@ export class GameCardButton extends React.Component<{
         )
     }
 }
-interface colorProps {
+interface teamProps {
     teamA: Color[][],
     teamB: Color[][]
 }
-export class CoopGameUI extends React.Component<colorProps,{
+export class CoopGameUI extends React.Component<{},{
     teamSwitchButtonState : switchTriStates,
-    board : Color[][]
+    board : Color[][],
+    teamA: Color[][],
+    teamB: Color [][]
 }>{
-    constructor(props : colorProps ){
+    constructor(props : teamProps ){
         super(props)
+        const boardA  = getRandomBoard(getGenerator(getRandomSeed()))
+        const boardB  = getRandomBoard(getGenerator(getRandomSeed())) 
+
         this.state = {
             teamSwitchButtonState: 'off',
-            board: this.props.teamA
+            board: boardA,
+            teamA: boardA,
+            teamB: boardB
         }
+    }
+
+    regenerateTeamState = () => {
+        this.setState((state)=>{
+           const boardA = getRandomBoard(getGenerator(getRandomSeed()))
+            return {
+                teamSwitchButtonState: state.teamSwitchButtonState,
+                board: boardA,
+                teamA: boardA,
+                teamB: getRandomBoard(getGenerator(getRandomSeed()))
+            }
+        })
     }
 
     handleToggleChange = (childState : switchTriStates) => {
         this.setState(() => {
             return {
                 teamSwitchButtonState: childState,
-                board: childState === 'team-a' ? this.props.teamA : this.props.teamB
+                board: childState === 'team-a' ? this.state.teamA : this.state.teamB
             }
         })
       };
@@ -98,7 +117,7 @@ export class CoopGameUI extends React.Component<colorProps,{
 
                 <div style={{display: "flex", justifyContent: 'center', padding: '0.5em', gap: "0.5em"}}>
                     <button>previous</button>
-                    <button>regenerate</button>
+                    <button onClick={this.regenerateTeamState}>regenerate</button>
                     <button>next</button>
                 </div>
             </div>
