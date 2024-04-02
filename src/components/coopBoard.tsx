@@ -1,7 +1,6 @@
 import React from "react"
 import Color from "../utils/colors"
 import { ElementOptionSwitch } from "./tristateSwitch/ElementOptionSwitch";
-import { getRandomBoard, getGenerator, getRandomSeed } from "../logic/generate";
 
 export function Board(props : { board : Color[][]}, boardIndex = 0){
     return (
@@ -32,30 +31,32 @@ export function Board(props : { board : Color[][]}, boardIndex = 0){
 export class GameCardButton extends React.Component<{
     color: Color,
 }>{
+    public marked = false;
+
     render(){
         return (
             <button 
-                style = {{ backgroundColor: this.props.color}}
-                className = "gameCard">
+                style = {{ backgroundColor: this.props.color, opacity: (this.marked) ? '20%' : '100%'}}
+                className = "gameCard"
+                onClick={() =>{
+                    this.marked = !this.marked
+                    this.forceUpdate()
+                }}>
             </button>
         )
     }
 }
 
-export class CoopGameUI extends React.Component{
-
-    constructor(props: {
+export class CoopGameUI extends React.Component<{
         teamA : Color[][],
         teamB : Color[][]
-    }){
-        super(props)
-    }
+}>{
     render(){
         return (
-            <div style={{flex: 'auto', justifyContent: 'center'}}>
+            <div>
                 <HideControls />
                     <div>
-                        <Board board={ getRandomBoard(getGenerator(getRandomSeed())) }/>
+                        <Board board={ this.props.teamA }/>
                     </div>
                 <GamesControls/>
             </div>
@@ -64,13 +65,11 @@ export class CoopGameUI extends React.Component{
 }
 
 export class HideControls extends React.Component{
-    constructor(props : {}){
-        super(props)
-    }
-
     render(){
         return (
-            <ElementOptionSwitch/>
+            <div style={{display: "flex", justifyContent: 'center', padding: '1em'}}>
+                <ElementOptionSwitch/>
+            </div>
         )
     }
 }
@@ -84,7 +83,7 @@ export class HideControls extends React.Component{
 export class GamesControls extends React.Component{
     render(){
         return(
-            <div>
+            <div style={{display: "flex", justifyContent: 'center', padding: '0.5em', gap: "0.5em"}}>
                 <button>previous</button>
                 <button>regenerate</button>
                 <button>next</button>

@@ -10,14 +10,14 @@ export const ElementOptionSwitch = ({ stateProp } : any) => {
   });
 
   return (
-    <div
-      className={`element-option-switch ${state.currentState}`}
-      onClick={() => {
-        dispatch("click");
-      }}
-    >
-      <img className="thumb" alt="Thumb" src="src/components/tristateSwitch/thumb-3.svg" />
-    </div>
+      <div
+        className={`element-option-switch ${state.currentState}`}
+        onClick={() => {
+          dispatch("click");
+        }}
+      >
+        <img className="thumb" alt="Thumb" src="src/components/tristateSwitch/thumb-3.svg" />
+      </div>
   );
 };
 

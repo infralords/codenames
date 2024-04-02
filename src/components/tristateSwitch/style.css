@@ -17,7 +17,7 @@
 }
 
 .element-option-switch.off {
-  background-color: var(--gray-6);
+  background-color: #ffffff;
 }
 
 .element-option-switch.team-a {
@@ -36,3 +36,9 @@
   left: 45px;
 }
 
+
+@media (prefers-color-scheme: dark) {
+  .element-option-switch.off .thumb{
+    filter: brightness(40%);
+  }
+}
