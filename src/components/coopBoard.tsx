@@ -1,96 +1,107 @@
-import React from "react"
+import React, { useReducer } from "react"
 import Color from "../utils/colors"
 import { ElementOptionSwitch } from "./tristateSwitch/ElementOptionSwitch";
+import type { switchTriStates } from "./tristateSwitch/ElementOptionSwitch";
+// import { getRandomBoard, getRandomSeed, getGenerator } from "../logic/generate";
 
-export function Board(props : { board : Color[][]}, boardIndex = 0){
-    return (
-        <>
-            {
-                props.board.map((row,i)=>{
-                        return (
-                            <div key={`${boardIndex},${i}`}>
-                                {
-                                    row.map((color,j)=>{
-                                        return (
-                                            <GameCardButton
-                                                key={`${boardIndex},${i},${j}`}
-                                                color= {color}
-                                            />
-                                        )
-                                    })
-                                }
-                            </div>
-                        )
-                    }
-                )
-            }
-        </>
-    )
+export function Board(props : {
+    board: Color[][],
+    mockup?: boolean 
+}) {
+        return (
+            <div className="board">
+                {
+                    props.board.map((row,i)=>{
+                            return (
+                                <div key={`${props.board.flat().toString()},${i}`}>
+                                    {
+                                        row.map((color,j)=>{
+                                            return (
+                                                <GameCardButton
+                                                    key={`${props.board.flat().toString()},${i},${j}`}
+                                                    color= {color}
+                                                />
+                                            )
+                                        })
+                                    }
+                                </div>
+                            )
+                        }
+                    )
+                }
+            </div>
+        )
 }
 
 export class GameCardButton extends React.Component<{
     color: Color,
 }>{
-    public marked = false;
+    public state = {
+        marked: false
+    };
+
 
     render(){
         return (
             <button 
-                style = {{ backgroundColor: this.props.color, opacity: (this.marked) ? '20%' : '100%'}}
+                style = {{ backgroundColor: this.props.color, opacity: (this.state.marked) ? '20%' : '100%'}}
                 className = "gameCard"
                 onClick={() =>{
-                    this.marked = !this.marked
+                    this.state.marked = !this.state.marked
                     this.forceUpdate()
                 }}>
             </button>
         )
     }
 }
-
-export class CoopGameUI extends React.Component<{
-        teamA : Color[][],
-        teamB : Color[][]
+interface colorProps {
+    teamA: Color[][],
+    teamB: Color[][]
+}
+export class CoopGameUI extends React.Component<colorProps,{
+    teamSwitchButtonState : switchTriStates,
+    board : Color[][]
 }>{
+    constructor(props : colorProps ){
+        super(props)
+        this.state = {
+            teamSwitchButtonState: 'off',
+            board: this.props.teamA
+        }
+    }
+
+    handleToggleChange = (childState : switchTriStates) => {
+        this.setState(() => {
+            return {
+                teamSwitchButtonState: childState,
+                board: childState === 'team-a' ? this.props.teamA : this.props.teamB
+            }
+        })
+      };
+
     render(){
         return (
             <div>
-                <HideControls />
-                    <div>
-                        <Board board={ this.props.teamA }/>
+                <div style={{display: "flex", justifyContent: 'center', padding: '1em'}}>
+                    <ElementOptionSwitch onSignalChange={this.handleToggleChange}/>
+                </div>
+                
+                {
+                    this.state.teamSwitchButtonState !== 'off'  ? 
+                    <Board board = {this.state.board} />        :
+                    <div style={{display: 'flex'}}>
+                        <img src="src/assets/no-eye.svg" 
+                         alt="no view para los papis"
+                         className="eye"/> 
                     </div>
-                <GamesControls/>
+                }
+
+                <div style={{display: "flex", justifyContent: 'center', padding: '0.5em', gap: "0.5em"}}>
+                    <button>previous</button>
+                    <button>regenerate</button>
+                    <button>next</button>
+                </div>
             </div>
-        )
+        )   
     }
 }
-
-export class HideControls extends React.Component{
-    render(){
-        return (
-            <div style={{display: "flex", justifyContent: 'center', padding: '1em'}}>
-                <ElementOptionSwitch/>
-            </div>
-        )
-    }
-}
-
-
-/**
- * @function GamesControls 
- * previous boards, generate new board, next board if it's on a previous board
- */
-
-export class GamesControls extends React.Component{
-    render(){
-        return(
-            <div style={{display: "flex", justifyContent: 'center', padding: '0.5em', gap: "0.5em"}}>
-                <button>previous</button>
-                <button>regenerate</button>
-                <button>next</button>
-            </div>
-        )
-    }
-}
-
-
-

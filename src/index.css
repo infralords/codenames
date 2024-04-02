@@ -50,15 +50,17 @@ button {
 button.gameCard {
   padding: 2em;
   margin: 0.5em;
+  outline: 1px solid white;
 }
 
 button:hover {
   border-color: #646cff;
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.eye{
+  flex: 1;
+  filter: invert(100%);
 }
 
 @media (prefers-color-scheme: light) {
@@ -71,5 +73,8 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+  .eye{
+    filter: none;
   }
 }

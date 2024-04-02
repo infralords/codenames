@@ -1,13 +1,18 @@
-import PropTypes from "prop-types";
-import React from "react";
+import React, {useEffect} from "react";
 import { useReducer } from "react";
 import "./style.css";
 
-export const ElementOptionSwitch = ({ stateProp } : any) => {
+export const ElementOptionSwitch = ({ stateProp , onSignalChange } : tristateProps ) => {
   const [state, dispatch] = useReducer(reducer, {
     currentState: stateProp || "off",
-    lastVisitedTeam: 'team-b'
+    lastVisitedTeam: 'team-b',
   });
+
+  useEffect(() => {
+    if (onSignalChange) {
+      onSignalChange(state.currentState);
+    }
+  }, [state, onSignalChange]);
 
   return (
       <div
@@ -24,7 +29,7 @@ export const ElementOptionSwitch = ({ stateProp } : any) => {
 function reducer(state : any, action : any) {
   if(action === "click"){
     if(state.currentState === 'off' && state.lastVisitedTeam === 'team-a'){
-      return{
+      return {
         currentState: 'team-b',
         lastVisitedTeam: 'team-b'
       }
@@ -43,6 +48,8 @@ function reducer(state : any, action : any) {
   return state
 }
 
-ElementOptionSwitch.propTypes = {
-  stateProp: PropTypes.oneOf(["team-a", "off", "team-b"]),
-};
+export type switchTriStates = "team-a" | "off" | "team-b"
+export interface tristateProps {
+  stateProp? : switchTriStates,
+  onSignalChange: Function 
+}
