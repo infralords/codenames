@@ -9,5 +9,5 @@ export default defineConfig({
       usePolling: true
     }
   },
-  base: "https://carafelix.github.io/codenames-coop/"
+  base: "dist/"
 })
