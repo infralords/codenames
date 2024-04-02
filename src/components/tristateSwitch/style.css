@@ -1,0 +1,38 @@
+.element-option-switch {
+  border-radius: 16px;
+  height: 24px;
+  position: relative;
+  width: 69px;
+}
+
+.element-option-switch .thumb {
+  height: 20px;
+  position: absolute;
+  top: 2px;
+  width: 20px;
+}
+
+.element-option-switch.team-b {
+  background-color: #ca2020;
+}
+
+.element-option-switch.off {
+  background-color: var(--gray-6);
+}
+
+.element-option-switch.team-a {
+  background-color: #1dc9a0;
+}
+
+.element-option-switch.team-b .thumb {
+  left: 5px;
+}
+
+.element-option-switch.off .thumb {
+  left: 25px;
+}
+
+.element-option-switch.team-a .thumb {
+  left: 45px;
+}
+

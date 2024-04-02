@@ -1,18 +1,8 @@
-import { Board } from './components/coopBoard'
-
-import { generateCoopBoard,
-         getGenerator,
-         getRandomBoard,
-         getRandomSeed } from './logic/generate'
-
-import { testBoard } from './components/_testBoard'
-
-
+import { CoopGameUI } from './components/coopBoard'
 function  App() {
   return (
     <>
-      <Board board = { testBoard } />
-
+      <CoopGameUI />
     </>
   )
 }
